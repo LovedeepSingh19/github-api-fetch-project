@@ -2,7 +2,6 @@
 FROM node:20-alpine
 
 # Set the working directory to /app
-ENV DEPLOYED_URL=3.106.193.190
 WORKDIR /usr/src/app
 # RUN npm install -g http
 # Copy package.json and package-lock.json to the working directory
