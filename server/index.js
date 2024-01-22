@@ -13,11 +13,12 @@ const port = 3000;
 app.get('/', async (req, res) => {
     const userName = req.query.userName
     const page = req.query.page
+    const per_page = req.query.perPage
     console.log(userName)
     if(userName){
 
         try {
-            const apiRepoResponse = await fetch(`https://api.github.com/users/${userName}/repos?per_page=10&page=${page}`);
+            const apiRepoResponse = await fetch(`https://api.github.com/users/${userName}/repos?per_page=${per_page}&page=${page}`);
             const reposData = await apiRepoResponse.json();
             res.render('repoPage', { data: { heroes: reposData } });
 
