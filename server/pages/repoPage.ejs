@@ -1,0 +1,87 @@
+<div class="container" style="max-width: 1200px; margin: 0 auto">
+  <style>
+    #heroes-list {
+        cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 10px;
+    }
+
+    .hero-item {
+      flex: 0 0 calc(50% - 20px);
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .language-badge {
+      /* display: inline-block; */
+      padding: 0.6em;
+      font-size: 0.75em;
+      line-height: 1;
+      /* white-space: nowrap; */
+      word-wrap: break-word;
+      background: #165eb6;
+      /* border: 1px solid #165eb6; */
+      border-radius: 8px;
+      border-radius: 0.25rem;
+      margin-top: 0.5rem;
+      color: rgb(255, 255, 255);
+    }
+    .description-container {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 2; /* Show only 2 lines */
+    }
+    .topics-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .topic-button {
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      padding: 0.6em;
+      font-size: 0.75em;
+      line-height: 1;
+      word-wrap: break-word;
+      background: #165eb6;
+      border-radius: 8px;
+      color: rgb(255, 255, 255);
+      cursor: pointer;
+    }
+  </style>
+  <div id="heroes-list">
+    <!-- loop through heroes data -->
+    <% data.heroes.forEach(hero => { %>
+    <div class="hero-item">
+      <div>
+        <strong style="font-size: larger; color: #165eb6;"><%= hero.name %></strong>
+        <br />
+        <div class="description-container">
+          <% if (hero.description) { %> <%= hero.description %> <% } else { %>
+            description <% } %>
+        </div>
+      </div>
+      <% if (hero.topics && hero.topics.length) { %>
+        <div class="topics-container">
+          <% hero.topics.forEach(topic => { %>
+            <div class="topic-button"><%= topic %></div>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <span class="language-badge">topic</span>
+      <% } %>
+    </div>
+    <% }); %>
+  </div>
+</div>
