@@ -1,12 +1,29 @@
 let numberOfPages;
+let deployed_url
 let currentPage = 1;
 const queryString = window.location.search;
 const params = new URLSearchParams(queryString);
 const username = params.get("userName");
+fetch('../../.env')
+    .then(response => response.text())
+    .then(envContent => {
+        const envVariables = envContent
+            .split('\n')
+            .filter(line => line.trim() !== '')
+            .reduce((acc, line) => {
+                const [key, value] = line.split('=');
+                acc[key.trim()] = value.trim();
+                return acc;
+            }, {});
+        console.log('DEPLOYED_URL:', envVariables.DEPLOYED_URL);
+        deployed_url = envVariables.DEPLOYED_URL
+    })
+    .catch(error => console.error('Error loading .env file:', error));
+
 
 async function fetchRepoData(pages) {
   return fetch(
-    `http://localhost:3000/?userName=${username}&page=${pages}`
+    `http://${deployed_url}:3000/?userName=${username}&page=${pages}`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
